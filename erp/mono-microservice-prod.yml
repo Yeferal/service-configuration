@@ -1,0 +1,40 @@
+server:
+  port: 9281
+  servlet:
+    context-path: /api/mono
+
+spring:
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5441/erp_mono_db_prod}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 15
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+    open-in-view: false
+
+  cache:
+    type: caffeine
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+
+cors:
+  allowed-origins: "http://localhost:4200"
+  allowed-methods: "GET,POST,PUT,DELETE"
+
+logging:
+  level:
+    root: WARN
+    org.springframework.web: INFO

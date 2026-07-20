@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+      routes:
+        - id: auth
+          uri: lb://auth-microservice
+          predicates:
+            - Path=/api/auth/**
+        - id: mono
+          uri: lb://mono-microservice
+          predicates:
+            - Path=/api/mono/**
+    loadbalancer:
+      ribbon:
+        enable: false
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6380}
+      password: ${REDIS_PASSWORD:passredis}
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
