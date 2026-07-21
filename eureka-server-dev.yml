@@ -8,4 +8,4 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://eureka-microservice:${server.port}/eureka/
+      defaultZone: http://eureka-server:${server.port}/eureka/
