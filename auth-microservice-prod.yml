@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5440/erp_prod}
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5441/erp_prod}
     username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
